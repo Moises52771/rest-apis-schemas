@@ -1,20 +1,24 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: ViaCep API
-  version: "1.0"
+  title: ViaCEP API
+  description: API pública para consulta de endereços brasileiros por CEP
+  version: 1.0.0
+servers:
+  - url: https://viacep.com.br/ws
 paths:
-  /{cep}/json:
+  /{cep}/json/:
     get:
-      summary: Buscar endereço pelo CEP
+      summary: Retorna informações de endereço para o CEP informado
       parameters:
         - name: cep
           in: path
           required: true
           schema:
             type: string
+            example: "01001000"
       responses:
         '200':
-          description: Endereço encontrado
+          description: OK
           content:
             application/json:
               schema:
@@ -23,6 +27,8 @@ paths:
                   cep:
                     type: string
                   logradouro:
+                    type: string
+                  complemento:
                     type: string
                   bairro:
                     type: string
